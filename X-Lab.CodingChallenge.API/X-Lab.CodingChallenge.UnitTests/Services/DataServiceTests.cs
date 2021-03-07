@@ -1,12 +1,10 @@
 ﻿// <copyright file="DataServiceUnitTests.cs" company="Bruno DUVAL">
 // Copyright (c) Bruno DUVAL.</copyright>
 
-using System;
 using System.Threading;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using XLab.CodingChallenge.API.Models;
 using XLab.CodingChallenge.API.Services;
 using XLab.CodingChallenge.API.Stores;
 using Xunit;

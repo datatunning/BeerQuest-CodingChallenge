@@ -1,14 +1,13 @@
 ﻿// <copyright file="Venue.cs" company="Bruno DUVAL">
 // Copyright (c) Bruno DUVAL.</copyright>
 
-using System;
 using FileHelpers;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace XLab.CodingChallenge.API.Models
 {
     [DelimitedRecord(",")]
-    [IgnoreFirst]
+    [IgnoreFirst(1)]
     public class Venue
     {
         [SwaggerSchema("The name of the venue", ReadOnly = true)]

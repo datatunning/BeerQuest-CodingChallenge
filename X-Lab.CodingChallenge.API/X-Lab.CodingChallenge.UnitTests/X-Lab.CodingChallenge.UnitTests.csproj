@@ -27,4 +27,10 @@
       <ProjectReference Include="..\X-Lab.CodingChallenge.API\X-Lab.CodingChallenge.API.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="leedsbeerquest.csv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

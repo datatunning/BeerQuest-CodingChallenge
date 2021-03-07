@@ -2,14 +2,12 @@
 // Copyright (c) Bruno DUVAL.</copyright>
 
 using System;
-using System.IO;
-using System.Linq;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FileHelpers;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using XLab.CodingChallenge.API.Models;
 
@@ -17,41 +15,44 @@ namespace XLab.CodingChallenge.API.Stores
 {
     public class DataRepository : IDataRepository
     {
-        private const string VenueUrl = "https://drive.google.com/file/d/1o5JTtFUHcBAjH47z4i_eZrFdyXvSzY_S/view";
+        private const string VenueUrl = "leedsbeerquest.csv";
         private readonly ILogger<IDataRepository> _logger;
-        private readonly IHttpClientFactory _httpClientFactory;
-        private Venue[] _venues = {};
+        private readonly List<Venue> _venues = new();
 
-        public DataRepository(ILogger<IDataRepository> logger, IHttpClientFactory httpClientFactory)
+        public DataRepository(ILogger<IDataRepository> logger)
         {
             logger.LogInformation("Initializing DataRepository");
             _logger = logger;
-            _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<Venue[]> GetAsync(CancellationToken cancellationToken = default)
+        public Task<Venue[]> GetAsync(CancellationToken cancellationToken = default)
         {
             try
             {
-                _logger.LogInformation("Retrieving venues");
-                var httpClient = _httpClientFactory.CreateClient();
-                await using var rawStream = await httpClient.GetStreamAsync(VenueUrl, cancellationToken);
-                using var rawReader = new StreamReader(rawStream);
-
-                _logger.LogInformation("Caching venues");
+                _logger.LogInformation("Getting CSV parser engine");
                 using var engine = new FileHelperAsyncEngine<Venue>();
-                using var recordReader = engine.BeginReadStream(rawReader);
 
-                this._venues = engine.ToArray();
+                _logger.LogInformation("Setting CSV engine error mode"); 
+                // engine.ErrorManager.ErrorMode = ErrorMode.IgnoreAndContinue;
+                
+                _logger.LogInformation("Starting CSV reader"); 
+                using var recordReader = engine.BeginReadFile($"{VenueUrl}");
+                
+                foreach (var record in engine)
+                {
+                    _logger.LogInformation($"Adding {record.name} to the venue list.");
+                    this._venues.Add(record);
+                }
 
-                return _venues;
+                _logger.LogInformation($"Returning {_venues.Count} Venues.");
+                return Task.FromResult(_venues.ToArray());
             }
             catch (HttpRequestException httpEx)
             {
                 if (httpEx.StatusCode == HttpStatusCode.NoContent)
                 {
                     _logger.LogWarning("Request did not returned any venues.");
-                    return new Venue[]{};
+                    return Task.FromResult(new Venue[]{});
                 }
 
                 _logger.LogError(
