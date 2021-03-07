@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using XLab.CodingChallenge.API.Services;
+using XLab.CodingChallenge.API.Stores;
 
 namespace XLab.CodingChallenge.API
 {
@@ -31,8 +33,11 @@ namespace XLab.CodingChallenge.API
         public void ConfigureServices(IServiceCollection services)
         {
             // Setup DI.
+            services.AddSingleton<IDataRepository, DataRepository>();
+            services.AddSingleton<IDataService, DataService>();
 
             // Add extra service for Diagnostic & Performance
+            services.AddHttpClient();
             services.AddHealthChecks();
             services.AddLogging();
             services.AddMemoryCache();
