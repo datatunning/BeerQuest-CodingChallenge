@@ -1,0 +1,72 @@
+name: Continuous-Integration
+
+on:
+  pull_request:
+  push:
+    branches: main
+
+jobs:  
+  API:
+    runs-on: ubuntu-latest
+        
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x    
+    - name: Install dependencies
+      working-directory: ./X-Lab.CodingChallenge.API
+      run: dotnet restore
+    
+    - name: Build
+      if: ${{ success() }}
+      working-directory: ./X-Lab.CodingChallenge.API
+      run: dotnet build --configuration Release --no-restore --verbosity normal
+
+    - name: Test
+      if: ${{ success() }}
+      working-directory: ./X-Lab.CodingChallenge.API
+      run: dotnet test --configuration Release --no-restore --no-build --verbosity normal  --collect:'XPlat Code Coverage' --settings coverlet.runsettings
+    
+    - name: Report Coverage
+      if: ${{ success() }}
+      uses: codecov/codecov-action@v1.0.10
+      with:
+        token: 221417aa-1a67-4b62-9c4c-1f800591db29
+
+  WEB:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 15.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Restore packages
+      working-directory: ./X-Lab.CodingChallenge.Webapp
+      run: npm ci ${{ matrix.node-version }}
+
+    - name: Build ${{ matrix.node-version }}
+      working-directory: ./X-Lab.CodingChallenge.Webapp
+      run: npm run build --if-present
+  
+    - name: Test ${{ matrix.node-version }}
+      working-directory: ./X-Lab.CodingChallenge.Webapp
+      run: npm test
+    
+    # Not sure if this will merge or override the coverage data from API
+    - name: Report Coverage
+      if: ${{ success() }}
+      uses: codecov/codecov-action@v1.0.10
+      with:
+        token: 221417aa-1a67-4b62-9c4c-1f800591db29

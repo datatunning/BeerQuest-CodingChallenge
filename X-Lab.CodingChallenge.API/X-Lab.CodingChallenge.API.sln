@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X-Lab.CodingChallenge.API", "X-Lab.CodingChallenge.API\X-Lab.CodingChallenge.API.csproj", "{D214C515-5906-49C0-93D2-2793BD177CAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X-Lab.CodingChallenge.UnitTests", "X-Lab.CodingChallenge.UnitTests\X-Lab.CodingChallenge.UnitTests.csproj", "{59796D4E-B104-4294-B9FE-9B0D6C917B4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D214C515-5906-49C0-93D2-2793BD177CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D214C515-5906-49C0-93D2-2793BD177CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D214C515-5906-49C0-93D2-2793BD177CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D214C515-5906-49C0-93D2-2793BD177CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59796D4E-B104-4294-B9FE-9B0D6C917B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59796D4E-B104-4294-B9FE-9B0D6C917B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59796D4E-B104-4294-B9FE-9B0D6C917B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59796D4E-B104-4294-B9FE-9B0D6C917B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CEBD65B3-3FA2-4B45-AA46-8516D0A421F3}
+	EndGlobalSection
+EndGlobal
