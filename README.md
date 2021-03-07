@@ -1,5 +1,5 @@
 # X-Lab Engineering Interview Challenge - Beer Quest
-
+[![Continuous-Integration](https://github.com/datatunning/X-Lab.CodingChallenge/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/datatunning/X-Lab.CodingChallenge/actions/workflows/continuous-integration.yml) [![codecov](https://codecov.io/gh/datatunning/X-Lab.CodingChallenge/branch/main/graph/badge.svg?token=I4O8CYKIHI)](https://codecov.io/gh/datatunning/X-Lab.CodingChallenge)
 ## The Aim
 
 This engineering challenge is designed to test a candidates ability to engineer a solution on top of an abstract data set. The challenge is specifically designed to allow the candidate to take any approach they wish in order to demonstrate their skill set in the most appropriate fashion.
