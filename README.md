@@ -50,3 +50,10 @@ This challenge will be split into two parts:
 * The solution for part 1 should be submitted 2 days prior to part 2 to allow time for review before the pairing challenge, where possible. The preference for sharing this would be via GitHub, but any reasonable means is acceptable.
 
 > For clarifications, please email us. We would also encourage candidates to feed back on the format of this challenge, and their experience with it, so that we can help improve it in the future.
+
+## How to run
+* Open the sln file
+* Run
+* Browser should open with swagger UI
+* Click try it
+* Click Execute
